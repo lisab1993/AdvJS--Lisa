@@ -20,7 +20,7 @@ const boardSchema = Schema(
     },
   },
   {
-    toJson: {
+    toJSON: {
       virtuals: true,
     },
   }
