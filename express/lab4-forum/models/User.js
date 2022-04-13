@@ -1,32 +1,30 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const bcrypt = require('bcrypt')
-const saltRounds = 10
+// A User model that will store user information.
 
+const mongoose = require("mongoose");
 
-const userSchema = Schema({
-    name: {
-        type: String,
-        required: true,
-        maxLength: 50
-    },
+const Schema = mongoose.Schema;
+
+const userSchema = Schema(
+  {
     username: {
-        type: String,
-        required: true,
-        maxLength: 50
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true,
-        minLength: 8,
-        maxLength: 20
-    }
-})
+      type: String,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-//before saving a user, has the password
-userSchema.pre('save', (next) => {
-    this.password = bcrypt.hashSync(this.password, saltRounds)
-    next()
-})
+const User = mongoose.model("User", userSchema);
 
-module.exports = mongoose.model('Users', userSchema)
+module.exports = User;
