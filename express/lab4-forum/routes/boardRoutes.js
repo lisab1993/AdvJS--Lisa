@@ -1,14 +1,16 @@
 const { Router } = require("express");
-const Board = require("../models/Board");
-const Post = require("../models/Post");
-
 const jwtMiddleware = require("../middleware/jwtMiddleware");
+const Board = require("../models/Board");
+// const Post = require("../models/Post");
 
+// const jwtMiddleware = require("../middleware/jwtMiddleware");
+
+//add jwt back
 const router = Router();
 
 //List all boards
-router.get("/", jwtMiddleware, async (req, res) => {
-  const boards = await Board.find().populate("posts");
+router.get("/", async (req, res) => {
+  const boards = await Board.find().populate({path: "posts"});
   res.send(boards);
 });
 
@@ -21,7 +23,7 @@ router.post("/", jwtMiddleware, async (req, res) => {
 });
 
 //Retrieve a specific board
-router.get("/:id", jwtMiddleware, async (req, res) => {
+router.get("/:id", async (req, res) => {
   const board = await Board.findOne({ _id: req.params.id });
   res.send(board);
 });

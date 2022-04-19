@@ -9,6 +9,7 @@ dotenv.config();
 const saltRounds = parseInt(process.env.SALTS);
 
 const User = require("../models/User");
+const Post = require("../models/Post");
 
 const authRouter = Router();
 
@@ -84,8 +85,11 @@ authRouter.post("/login", [...loginValidator], async (req, res) => {
 });
 
 //another route to profile. it will have info about the user, as well as all of their posts
-authRouter.get('/', jwtMiddleware, async(req, res) => {
-  res.send("it worked!")
+authRouter.get('/profile', jwtMiddleware, async(req, res) => {
+  const posts = await (await Post.find().populate('board')).filter(post => post.author = req.user.id)
+  const output = {'username': req.user.username, 'admin status': req.user.isAdmin, 'userPosts': posts}
+  res.send(output)
+  
 })
 
 module.exports = authRouter;

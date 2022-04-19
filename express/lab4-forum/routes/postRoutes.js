@@ -6,7 +6,7 @@ const jwtMiddleware = require('../middleware/jwtMiddleware')
 const router = Router();
 
 //List all posts
-router.get("/", jwtMiddleware, async (req, res) => {
+router.get("/", async (req, res) => {
   const posts = await Post.find().populate('board');
   res.send(posts);
 });
@@ -19,7 +19,7 @@ router.post("/", jwtMiddleware, async (req, res) => {
 });
 
 //Retrieve a specific post
-router.get("/:id", jwtMiddleware, async (req, res) => {
+router.get("/:id", async (req, res) => {
   const post = await Post.findOne({ _id: req.params.id });
   post ? res.send(post) : res.status(400).send("oops, something went wrong!");
   // console.log(req.user.id, 'req.user from get')
