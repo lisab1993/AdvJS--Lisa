@@ -24,6 +24,13 @@ const loginValidator = [
   check("password").exists().isLength({ min: 3, max: 20}),
 ];
 
+//prevents the password from being sent with the user object
+const sanitizeUserPassword = (userObject) => ({
+  ...userObject.toJSON(),
+  password: undefined
+})
+
+
 //signup
 authRouter.post("/signup", [...signupValidator], async (req, res) => {
   const errors = validationResult(req);
@@ -53,7 +60,7 @@ authRouter.post("/signup", [...signupValidator], async (req, res) => {
     password: bcrypt.hashSync(password, saltRounds),
   });
 
-  res.send(user);
+  res.send(sanitizeUserPassword(user));
 });
 
 // login

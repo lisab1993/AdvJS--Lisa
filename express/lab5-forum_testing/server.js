@@ -9,6 +9,7 @@ const PostRoutes = require("./routes/postRoutes");
 
 const app = express();
 
+
 //middleware
 //don't log everything on tests; keeps everything clean
 //another way to write if statement
@@ -24,12 +25,12 @@ app.use("/post", PostRoutes);
 
 const connectDB = async (dbName) => {
   try {
-    const dbConnection = await mongoose.connect(
+    const connection = await mongoose.connect(
       `mongodb://localhost/${dbName}`
     );
     if (process.env.ENV !== "test") {
       console.log(`connected to ${dbName}`);
-    return dbConnection
+    return connection
     }
   } catch (err) {
     console.log(err);
@@ -43,12 +44,13 @@ const startServer = async(port = 5050, hostname = 'localhost') => {
   });
 }
 
-
-
+//comment this out during testing, otherwise it goes to the wrong db
+// startServer()
 
 
 //for tests
 module.exports = {
   app,
   connectDB,
+  startServer
 };

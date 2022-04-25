@@ -16,10 +16,11 @@ router.get("/", async (req, res) => {
 
 //Create a board
 router.post("/", jwtMiddleware, async (req, res) => {
-  console.log(req.body, "req.body")
   const board = new Board(req.body);
   await board.save();
+  // console.log('start of route -boardRoutes.js')
   res.send(board);
+  // console.log('board sent -boardRoutes.js')
 });
 
 //Retrieve a specific board
