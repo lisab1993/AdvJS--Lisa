@@ -32,7 +32,16 @@ const App = () => {
             todoIndex = obj
         }
     }
-    console.log(todoIndex)
+    let itemObj = todos[todoIndex]
+    if (itemObj['complete'] === false) {
+      itemObj['complete'] = true
+      todos[todoIndex] = itemObj
+      setTodos([...todos])
+    } else {
+      itemObj['complete'] = false
+      todos[todoIndex] = itemObj
+      setTodos([...todos])
+    }
   };
 
   return (
