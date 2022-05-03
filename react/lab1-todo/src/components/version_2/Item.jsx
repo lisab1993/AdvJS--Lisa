@@ -5,7 +5,7 @@ const Item = (props) => {
     <div>
         {props.name}
         {props.complete === false ? <button onClick={(() => props.handleToggle(props))}>Complete</button> : <button onClick={(() => props.handleToggle(props))}>Back to Incomplete</button>}
-        <button>Delete</button>
+        <button onClick={() => props.handleRemove(props)}>Delete</button>
     </div>
   )
 }

@@ -11,7 +11,7 @@ function List(props) {
     <div>
       <h3>List Component</h3>
         {props.todos.map((obj, index) => (
-            <Item key={index} name={obj.name} complete={obj.complete} handleToggle={props.handleToggle}/>
+            <Item key={index} name={obj.name} complete={obj.complete} handleToggle={props.handleToggle} handleRemove={props.handleRemove}/>
         ))}
     </div>
   );

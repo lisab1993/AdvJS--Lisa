@@ -23,24 +23,39 @@ const App = () => {
 
   const addTodo = () => {
     setTodos([...todos, { name: newText, complete: false }]);
+    setNewText("")
+  };
+
+  const removeItem = (item) => {
+    let removeIndex = 0;
+    for (obj in todos) {
+      if (item.name === todos[obj]["name"]) {
+        removeIndex = obj
+      }
+    }
+    todos.splice(removeIndex, 1)
+    setTodos([...todos])
   };
 
   const toggleCompleted = (item) => {
-    let todoIndex = null
+    let todoIndex = null;
+    //loop to find the item
+    //indexOf doesn't work due to the function in the item
     for (obj in todos) {
-        if (item.name === todos[obj]['name']) {
-            todoIndex = obj
-        }
+      if (item.name === todos[obj]["name"]) {
+        todoIndex = obj;
+      }
     }
-    let itemObj = todos[todoIndex]
-    if (itemObj['complete'] === false) {
-      itemObj['complete'] = true
-      todos[todoIndex] = itemObj
-      setTodos([...todos])
+    //grab the object from state
+    let itemObj = todos[todoIndex];
+    //determine if completion needs to be true or false
+    if (itemObj["complete"] === false) {
+      //flip the boolean in our copied object and save it
+      itemObj["complete"] = true;
+      setTodos([...todos]);
     } else {
-      itemObj['complete'] = false
-      todos[todoIndex] = itemObj
-      setTodos([...todos])
+      itemObj["complete"] = false;
+      setTodos([...todos]);
     }
   };
 
@@ -65,6 +80,7 @@ const App = () => {
       <List
         todos={todos.filter((todoObj) => todoObj.complete === false)}
         handleToggle={toggleCompleted}
+        handleRemove={removeItem}
       />
 
       <br />
@@ -75,6 +91,7 @@ const App = () => {
       <List
         todos={todos.filter((todoObj) => todoObj.complete === true)}
         handleToggle={toggleCompleted}
+        handleRemove={removeItem}
       />
     </div>
   );
