@@ -27,14 +27,16 @@ const App = () => {
   };
 
   const removeItem = (item) => {
-    let removeIndex = 0;
-    for (obj in todos) {
-      if (item.name === todos[obj]["name"]) {
-        removeIndex = obj
-      }
-    }
-    todos.splice(removeIndex, 1)
-    setTodos([...todos])
+        // let removeIndex = 0;
+        // for (obj in todos) {
+        //   if (item.name === todos[obj]["name"]) {
+        //     removeIndex = obj
+        //   }
+        // }
+        // todos.splice(removeIndex, 1)
+        // setTodos([...todos])
+        //from Anthony's feedback: 
+        setTodos(todos.filter((todo) => todo.name !== item.name));
   };
 
   const toggleCompleted = (item) => {
@@ -42,21 +44,24 @@ const App = () => {
     //loop to find the item
     //indexOf doesn't work due to the function in the item
     for (obj in todos) {
-      if (item.name === todos[obj]["name"]) {
-        todoIndex = obj;
-      }
+        if (item.name === todos[obj]["name"]) {
+            todoIndex = obj;
+        }
     }
     //grab the object from state
     let itemObj = todos[todoIndex];
     //determine if completion needs to be true or false
-    if (itemObj["complete"] === false) {
-      //flip the boolean in our copied object and save it
-      itemObj["complete"] = true;
-      setTodos([...todos]);
-    } else {
-      itemObj["complete"] = false;
-      setTodos([...todos]);
-    }
+    // if (itemObj["complete"] === false) {
+    //  //flip the boolean in our copied object and save it
+    //  itemObj["complete"] = true;
+    //  setTodos([...todos]);
+    // } else {
+    //  itemObj["complete"] = false;
+    //  setTodos([...todos]);
+    // }
+    //from Anthony's feedback
+    itemObj["complete"] = !itemObj["complete"];
+    setTodos([...todos]);
   };
 
   return (
