@@ -9,6 +9,7 @@ function List(props) {
 
   return (
     <div>
+      List Component
         {props.todos.map((obj, index) => (
             <Item key={index} name={obj.name} complete={obj.complete} handleToggle={props.handleToggle} handleRemove={props.handleRemove}/>
         ))}
