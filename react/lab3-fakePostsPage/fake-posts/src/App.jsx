@@ -5,8 +5,8 @@ import "./index.css";
 
 function App() {
   const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [test, setTest] = useState([]);
+  let prePosts = [];
+  let users = [];
 
   const getObjIndex = (array, propName, targetVal) => {
     //takes in an array
@@ -24,19 +24,33 @@ function App() {
     await axios
       .get("https://jsonplaceholder.typicode.com/posts")
       .then((res) => {
-        console.log("posts set");
-        setPosts(res.data);
+        prePosts = res.data;
+        console.log("preposts set");
+        // console.log(prePosts, 'preposts');
       });
     await axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
+        users = res.data;
         console.log("users set");
-        setUsers(res.data);
+        // console.log(users, "users");
       });
-    let output = posts.map(
-      (post) => (post.userId = users[getObjIndex(users, "id", post.userId)])
+    let userIndex = "";
+    let user = "";
+    let output = [];
+    prePosts.map(
+      (post) => (
+        (userIndex = getObjIndex(users, "id", post.userId)),
+        (user = users[userIndex]),
+        // console.log(user['name'])
+        //update the post Id
+        (post["author"] = user["name"]),
+        // console.log(post),
+        output.push(post)
+      )
     );
-    setTest(output);
+    // console.log(output, 'output')
+    setPosts(output);
   };
 
   useEffect(() => {

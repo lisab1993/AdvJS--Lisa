@@ -2,8 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 
 const Posts = (props) => {
-    const posts = props.posts
-    const users = props.users
+    // const posts = props.posts
+    // const users = props.users
 
     // const getObjIndex = (array, propName, targetVal) => {
     //     //takes in an array
@@ -38,12 +38,16 @@ const Posts = (props) => {
 
   return (
     <div>
-      {/* {props.users.map((obj, index) => (
+      {props.posts.map((obj, index) => (
         <div key={index}>
-          Name: {obj.name}
+          Name: {obj.title}
+          <br />
+          Body: {obj.body}
+          <br />
+          Author: {obj.author}
           <br /> <br /> <hr />
         </div>
-      ))}  */}
+      ))} 
 
     </div>
   );
