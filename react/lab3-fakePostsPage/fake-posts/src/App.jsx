@@ -4,15 +4,20 @@ import Posts from "./components/Posts.jsx";
 import "./index.css";
 
 function App() {
+  //posts with author names added
   const [posts, setPosts] = useState([]);
+  //the posts as returned by an axios call
   let prePosts = [];
+  //the users as returned by an axios call
   let users = [];
 
   const getObjIndex = (array, propName, targetVal) => {
-    //takes in an array
-    //searches for an object that has the desired property/value combo
+    //takes in an array to search through
+    //searches for an object desired property value
+    //propName is the prop (name, id, title,)
+    //targetVal is property value to search for ('Leanne Graham', 1, 'qui est esse')
     //returns the index of that object
-    //empty object means to pass and do nothing
+    //empty object in the negative ternary means to do nothing
     let output = "";
     array.map((obj) =>
       obj[propName] === targetVal ? (output = array.indexOf(obj)) : {}
@@ -20,21 +25,22 @@ function App() {
     return output;
   };
 
-  const handleAsync = async () => {
+  const getPosts = async () => {
+    //gets the posts from the api
     await axios
       .get("https://jsonplaceholder.typicode.com/posts")
       .then((res) => {
         prePosts = res.data;
         console.log("preposts set");
-        // console.log(prePosts, 'preposts');
       });
+      //gets the users from the api
     await axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
         users = res.data;
         console.log("users set");
-        // console.log(users, "users");
       });
+      //add the author's names to their respective posts
     let userIndex = "";
     let user = "";
     let output = prePosts.map(
@@ -44,12 +50,11 @@ function App() {
         return {...post, author: user['name']}
       }
     );
-    // console.log(output, 'output')
     setPosts(output);
   };
 
   useEffect(() => {
-    handleAsync();
+    getPosts();
   }, []);
 
   return (

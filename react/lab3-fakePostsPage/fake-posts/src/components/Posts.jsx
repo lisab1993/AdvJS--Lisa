@@ -1,40 +1,5 @@
-import React from "react";
-import { useEffect } from "react";
 
 const Posts = (props) => {
-    // const posts = props.posts
-    // const users = props.users
-
-    // const getObjIndex = (array, propName, targetVal) => {
-    //     //takes in an array
-    //     //searches for an object that has the desired property/value combo
-    //     //returns the index of that object
-    //     //empty object means to pass and do nothing
-    //     let output = ''
-    //     array.map(obj => (
-    //         (obj[propName] === targetVal) ?
-    //         output = (array.indexOf(obj)) : 
-    //         {}
-    //     ))
-    //     return output
-    // }
-
-    // useEffect(() => {
-    //     let title = ''
-    //     let body = '' 
-    //     let user = ''
-    //     posts.map(post => (
-    //         title = post.title,
-    //         console.log(title, ' -title'),
-    //         body = post.body,
-    //         console.log(body, ' -body'),
-    //         user = users[getObjIndex(users, 'id', post.userId)],
-    //         console.log(user['name'], ' -user')
-    //         // console.log((users[getObjIndex(users, 'id', post.userId)])),
-
-            
-    //     ))
-    // }, [posts, users])
 
   return (
     <div>
