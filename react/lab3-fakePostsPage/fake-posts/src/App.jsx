@@ -37,17 +37,12 @@ function App() {
       });
     let userIndex = "";
     let user = "";
-    let output = [];
-    prePosts.map(
-      (post) => (
-        (userIndex = getObjIndex(users, "id", post.userId)),
-        (user = users[userIndex]),
-        // console.log(user['name'])
-        //update the post Id
-        (post["author"] = user["name"]),
-        // console.log(post),
-        output.push(post)
-      )
+    let output = prePosts.map(
+      (post) => {
+        userIndex = getObjIndex(users, "id", post.userId)
+        user = users[userIndex]
+        return {...post, author: user['name']}
+      }
     );
     // console.log(output, 'output')
     setPosts(output);
