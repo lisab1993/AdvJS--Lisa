@@ -31,6 +31,11 @@ module.exports = {
       pink: colors.pink,
       rose: colors.rose,
     },
+    fontFamily: {
+      comfortaa: [ 'Comfortaa', 'cursive'],
+      handlee: ['Handlee', 'cursive'],
+      cookie: ['cookie', 'cursive']
+    },
     extend: {},
   },
   plugins: [],

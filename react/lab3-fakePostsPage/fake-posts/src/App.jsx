@@ -10,6 +10,7 @@ function App() {
   let prePosts = [];
   //the users as returned by an axios call
   let users = [];
+  
 
   const getObjIndex = (array, propName, targetVal) => {
     //takes in an array to search through
@@ -33,23 +34,26 @@ function App() {
         prePosts = res.data;
         console.log("preposts set");
       });
-      //gets the users from the api
+    //gets the users from the api
     await axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
         users = res.data;
         console.log("users set");
       });
-      //add the author's names to their respective posts
+    //add the author's names to their respective posts
     let userIndex = "";
     let user = "";
-    let output = prePosts.map(
-      (post) => {
-        userIndex = getObjIndex(users, "id", post.userId)
-        user = users[userIndex]
-        return {...post, author: user['name']}
-      }
-    );
+    let output = prePosts.map((post) => {
+      userIndex = getObjIndex(users, "id", post.userId);
+      user = users[userIndex];
+      return {
+        ...post,
+        author: user["name"],
+        title: post.title[0].toUpperCase() + post.title.slice(1),
+        body: post.body[0].toUpperCase() + post.body.slice(1) + ".",
+      };
+    });
     setPosts(output);
   };
 
@@ -58,7 +62,7 @@ function App() {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex bg-emerald-800">
       <Posts posts={posts} />
     </div>
   );
