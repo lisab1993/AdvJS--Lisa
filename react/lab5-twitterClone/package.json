@@ -1,0 +1,17 @@
+{
+  "name": "lab5-twitterclone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "concurrent": "concurrently -p [{name}] -c bgBlue.bold,bgGreen.bold -n backend,frontend",
+    "start": "npm run concurrent \"cd backend && npm start\"",
+    "test": "cd backend && npm run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.2.0"
+  }
+}
