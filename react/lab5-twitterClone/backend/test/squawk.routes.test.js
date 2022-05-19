@@ -1,4 +1,4 @@
-const { ChainCondition } = require("express-validator/src/context-items");
+
 const { app } = require("../src/server");
 
 const { signupUser, loginUser, validUser } = require("./auth.routes.test");
@@ -7,7 +7,7 @@ const createSquawk = async (body, token) => {
   return await chai
     .request(app)
     .post("/squawk/")
-    .send({ body })
+    .send(body)
     .set("Authorization", `Bearer ${token}`);
 };
 
@@ -20,7 +20,7 @@ describe("[POST] /squawk/", async () => {
 
   it("Should create a squawk", async () => {
     const res = await createSquawk("Cintra", this.token);
-
+    console.log(res.body, 'res.body1')
     expect(res.body.body).to.eq("Cintra");
     expect(res.status).to.eq(201);
   });

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "concurrent": "concurrently -p [{name}] -c bgBlue.bold,bgGreen.bold -n backend,frontend",
-    "start": "npm run concurrent \"cd backend && npm start\"",
+    "start": "npm run concurrent \"cd backend && npm start\" \"cd frontend && npm start\"",
     "test": "cd backend && npm run test"
   },
   "keywords": [],

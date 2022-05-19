@@ -18,7 +18,7 @@ const signupValidator = [
 
 
 const squawkValidator = [
-  check('body').exists().isLength({min: 1, max: 241})
+  check("body").exists().isLength({min: 1, max: 241})
 ]
 
 

@@ -10,7 +10,8 @@ const router = Router();
 
 //Create
 router.post("/", [...squawkValidator, handleValidationErrors, jwtMiddleware], async (req, res) => {
-  res.send("🌷");
+  const squawk = await Squawk.create(req.body.body, req.user._id)
+  res.status(201).send(squawk)
 });
 
 module.exports = router;
