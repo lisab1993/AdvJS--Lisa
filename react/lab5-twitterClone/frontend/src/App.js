@@ -2,6 +2,7 @@ import { setGlobal, addCallback } from "reactn"
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
+import Home from "./pages/Home"
  
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
     if (state) return JSON.parse(state)
 
     return {
-      token: null
+      token: null,
+      recentSquawk: false
     }
   }
 
@@ -22,9 +24,8 @@ function App() {
 
   return (
     <Router>
-      Hello World
       <Routes>
-        <Route path="/"/>
+        <Route path="/" element={<Home />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={<Signup />}/>
         <Route path="/profile" />
